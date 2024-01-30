@@ -13,6 +13,7 @@ interface PokemonCardProps {
 }
 
 const PokemonCard: React.FC<PokemonCardProps> = (props) => {
+  const typesList: string[] = ['poison', 'Normal'];
   return (
     <Card>
       <CardActionArea>
@@ -32,8 +33,16 @@ const PokemonCard: React.FC<PokemonCardProps> = (props) => {
           <Typography gutterBottom variant="h5" component="div">
             {props.name}
           </Typography>
+          {typesList.map((type, index) => (
+        <Typography key={index} variant="body2" color="text.secondary">
+          {type}
+        </Typography>
+      ))}
         </CardContent>
       </CardActionArea>
+      <CardActions>
+        <Button size="small">Learn More</Button>
+      </CardActions>
     </Card>
   );
 }

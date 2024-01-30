@@ -17,7 +17,8 @@ export const PokedexList = () => {
   const loadPokemons = async () => {
     try {
       const result = await ListPokemon(nextOffset.toString());
-      setPokemons((prevPokemons) => [...prevPokemons, ...result]);
+      // Limpa a lista antiga e adiciona os novos Pokémon
+      setPokemons(result);
       setNextOffset((prevOffset) => prevOffset + result.length);
     } catch (error) {
       console.error('Erro ao obter Pokémon:', error);
