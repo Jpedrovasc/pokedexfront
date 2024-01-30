@@ -41,15 +41,17 @@ export const PokedexList = () => {
               </Grid>
             ))
           ) : (
-            <p>Nenhum Pokémon encontrado. Verifique a conexão com a API ou tente novamente mais tarde.</p>
+            null
           )}
         </Grid>
 
-        <Grid container justifyContent="center" style={{ marginTop: '16px' }}>
-          <Button variant="contained" color="primary" onClick={handleButtonClick}>
-            Carregar mais Pokémon
-          </Button>
-        </Grid>
+        {pokemons.length > 0 && (
+          <Grid container justifyContent="center" style={{ marginTop: '16px' }}>
+            <Button variant="contained" color="primary" onClick={handleButtonClick}>
+              Carregar mais Pokémon
+            </Button>
+          </Grid>
+        )}
       </Container>
     </div>
   );
