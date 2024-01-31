@@ -49,38 +49,39 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function NavBarSearch() {
-  return (
-    <Box sx={{ flexGrow: 1, marginBottom:"2em" }}>
-      <AppBar position="static" sx={{backgroundColor:'gray'}}>
-        <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
-          >
-          </Typography>
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Nome ou tipo do pokemon..."
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </Search>
-        </Toolbar>
-      </AppBar>
-    </Box>
-  );
+
+export interface NavBarSearchProps {
+  onSearchChange: (searchValue: string) => void;
+};
+
+export default function NavBarSearch({ onSearchChange }: NavBarSearchProps) {
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const inputValue = event.target.value;
+    onSearchChange(inputValue);
+};
+
+return (
+  <Box sx={{ flexGrow: 1, marginBottom: '2em' }}>
+    <AppBar position="static" sx={{ backgroundColor: 'gray' }}>
+      <Toolbar>
+        <Typography
+          variant="h6"
+          noWrap
+          component="div"
+          sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+        ></Typography>
+        <Search>
+          <SearchIconWrapper>
+            <SearchIcon />
+          </SearchIconWrapper>
+          <StyledInputBase
+            placeholder="Nome ou tipo do Pokémon..."
+            inputProps={{ 'aria-label': 'search' }}
+            onChange={handleInputChange}
+          />
+        </Search>
+      </Toolbar>
+    </AppBar>
+  </Box>
+);
 }
