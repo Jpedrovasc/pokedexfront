@@ -20,6 +20,7 @@ interface Pokemon {
   types: string[];
   moves: string[];
   abilities: string[];
+  evolutions: string[];
 }
 
 export const PokemonExibir = () => {
@@ -67,8 +68,8 @@ export const PokemonExibir = () => {
           <Box sx={{ borderBottom: 1, borderColor: "divider", marginTop: 2 }}>
   <BasicTabs
     tabData={[
-      { label: "Abilities", content: pokemon.abilities.join(", ")  },
-      { label: "Evolution", content: "Conteúdo para Evolução" },
+      { label: "Abilities", content: pokemon.abilities.join(", ") },
+      { label: "Evolution", content: pokemon.evolutions.join(", ") },
       { label: "Movimentos", content: pokemon.moves.join(", ") },
     ]}
   />
