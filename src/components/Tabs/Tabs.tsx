@@ -1,8 +1,10 @@
-import * as React from "react";
+import React from "react";
+import Box from "@mui/material/Box";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
+import Chip from "@mui/material/Chip";
+import useTheme from "@mui/system/useTheme";
 
 interface TabPanelProps {
   tabContent: React.ReactNode;
@@ -11,7 +13,7 @@ interface TabPanelProps {
 }
 
 function CustomTabPanel(props: TabPanelProps) {
-  const { tabContent, value, index, ...other } = props;
+  const { tabContent, value, index } = props;
 
   return (
     <div
@@ -19,10 +21,9 @@ function CustomTabPanel(props: TabPanelProps) {
       hidden={value !== index}
       id={`simple-tabpanel-${index}`}
       aria-labelledby={`simple-tab-${index}`}
-      {...other}
     >
       {value === index && (
-        <Box sx={{ p: 3 }}>
+        <Box sx={{ p: 3, display: "flex", flexDirection: "row", flexWrap: "wrap" }}>
           <Typography>{tabContent}</Typography>
         </Box>
       )}
@@ -31,11 +32,12 @@ function CustomTabPanel(props: TabPanelProps) {
 }
 
 interface BasicTabsProps {
-  tabData: { label: string; content: React.ReactNode }[];
+  tabData: { label: string; content: React.ReactNode; chips?: React.ReactNode[] }[];
 }
 
 export default function BasicTabs({ tabData }: BasicTabsProps) {
   const [value, setValue] = React.useState(0);
+  const theme = useTheme();
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -59,11 +61,7 @@ export default function BasicTabs({ tabData }: BasicTabsProps) {
           justifyContent: "center",
         }}
       >
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          aria-label="tabs"
-        >
+        <Tabs value={value} onChange={handleChange} aria-label="tabs">
           {tabData.map((tab, index) => (
             <Tab key={index} label={tab.label} {...a11yProps(index)} />
           ))}
